@@ -36,4 +36,14 @@ public class Account {
     private BigDecimal balance;
 
     private LocalDate date;
+
+//    public Account(Long id, String accountType, String accNumber, String accountName, BigDecimal balance, LocalDate date) {
+//        this.id = id;
+//        this.accountType = accountType;
+//        this.accNumber = accNumber;
+//        this.accountName = accountName;
+//        this.balance = balance;
+//        this.date = date;
+//    }
+
 }

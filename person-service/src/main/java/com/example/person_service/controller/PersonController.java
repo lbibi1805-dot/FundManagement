@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +18,12 @@ public class PersonController {
     @PostMapping("/person")
     public Person addPerson(@RequestBody Person person){
         return repository.save(person);
+    }
+
+    // 2. Get All (ĐÂY LÀ HÀM BẠN ĐANG THIẾU)
+    @GetMapping("/persons/person")
+    public List<Person> getAllPersons() {
+        return repository.findAll();
     }
 
     // Get One
