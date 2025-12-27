@@ -32,6 +32,7 @@ public class Account {
     private String accountName;
 
     // Map JSON "Balance"
+    @JsonProperty("Balance")
     private BigDecimal balance;
 
     private LocalDate date;
