@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: fund_mysql
+    ports:
+      - "3307:3306"  # Map ra port 3307 để tránh đụng độ MySQL có sẵn trên máy
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fund_db
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - fund-network
+
+networks:
+  fund-network:
+
+volumes:
+  db_data:
