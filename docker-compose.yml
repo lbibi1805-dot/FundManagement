@@ -5,12 +5,40 @@ services:
     image: mysql:8.0
     container_name: fund_mysql
     ports:
-      - "3307:3306"  # Map ra port 3307 để tránh đụng độ MySQL có sẵn trên máy
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fund_db
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - fund-network
+
+  person-service:
+    build: ./person-service
+    container_name: person-service
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/fund_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysqldb
+    networks:
+      - fund-network
+
+  account-service:
+    build: ./account-service
+    container_name: account-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/fund_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysqldb
     networks:
       - fund-network
 
